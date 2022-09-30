@@ -98,6 +98,10 @@ class element extends \tool_certificate\element {
             $date = $issue->expires;
         } else {
             $date = $issue->timecreated;
+            if (isset($issue->data)) {
+                    $customdateinfo = json_decode($issue->data);
+                    $date = !empty($customdateinfo->customdate) ? $customdateinfo->customdate : $issue->timecreated;
+            }
         }
 
         // Ensure that a date has been set.
