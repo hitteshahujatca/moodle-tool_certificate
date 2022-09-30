@@ -128,3 +128,24 @@ Feature: Being able to manually issue a certificate to a user
     And I click on "Regenerate" "button" in the "Confirm" "dialogue"
     And I should see "User 11"
     And I log out
+  
+  Scenario: Issue a certificate with custom issue date as issuer user
+    When I log in as "issuer0"
+    And I navigate to "Certificates > Manage certificate templates" in site administration
+        # Issue a certificate for user11 with custom issue date.
+    And I press "Issue certificates" action in the "Certificate 0" report row
+    And the field "expirydatetype" matches value "Never"
+    And I set the field "customdateabsolute[enabled]" to "1"
+    And the field "customdateabsolute[enabled]" matches value "1"
+    And I set the following fields to these values:
+      | Select users to issue certificate to  | User 11 |
+      | customdateabsolute[day]               | ##tomorrow##%d##    |
+      | customdateabsolute[month]             | ##tomorrow##%B##    |
+      | customdateabsolute[year]              | ##tomorrow##%Y##    |
+    And I press "Save"
+    And I press "Certificates issued" action in the "Certificate 0" report row
+    Then "User 11" "text" should exist in the "reportbuilder-table" "table"
+    And the following should exist in the "reportbuilder-table" table:
+      | First name / Surname | Date issued            |
+      | User 11              | ##tomorrow##%d %B %Y## |
+    And I log out
