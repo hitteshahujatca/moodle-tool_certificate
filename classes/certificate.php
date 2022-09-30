@@ -628,6 +628,26 @@ class certificate {
     }
 
     /**
+     * Add certificate custom issue date element to a MoodleQuickForm.
+     *
+     * @param MoodleQuickForm $mform form the elements are added to
+     */
+    public static function add_customissuedate_to_form(MoodleQuickForm &$mform): void {
+        $group = [];
+        $group[] =& $mform->createElement('date_selector', 'customdateabsolute', '', ['optional' => true]);
+        $mform->addGroup($group, 'customdateformgroup', get_string('customissuedate', 'tool_certificate'), ' ', false);
+    }
+
+    /**
+     * Add certificate send notification checkbox element to a MoodleQuickForm.
+     *
+     * @param MoodleQuickForm $mform form the elements are added to
+     */
+    public static function add_send_notification_checkbox_to_form(MoodleQuickForm &$mform): void {
+        $mform->addElement('checkbox', 'sendissuenotification', get_string('sendemailnotification', 'tool_certificate'));
+    }
+
+    /**
      * Calculates certificate expiry date.
      *
      * @param int $datetype DATE_NEVER|DATE_ABSOLUTE|DATE_AFTER
