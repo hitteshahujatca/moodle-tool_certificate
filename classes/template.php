@@ -709,7 +709,10 @@ class template {
 
         // Create the issue file and send notification.
         $issuefile = $this->create_issue_file($issue);
-        self::send_issue_notification($issue, $issuefile);
+        // Only issue notification when the checkbox is checked.Hittesh Ahuja / The Crew Academy.
+        if ($data['sendissuenotification']) {
+            self::send_issue_notification($issue, $issuefile);
+        }
 
         // Trigger event.
         \tool_certificate\event\certificate_issued::create_from_issue($issue)->trigger();
