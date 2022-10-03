@@ -128,7 +128,7 @@ Feature: Being able to manually issue a certificate to a user
     And I click on "Regenerate" "button" in the "Confirm" "dialogue"
     And I should see "User 11"
     And I log out
-  
+
   Scenario: Issue a certificate with custom issue date as issuer user
     When I log in as "issuer0"
     And I navigate to "Certificates > Manage certificate templates" in site administration

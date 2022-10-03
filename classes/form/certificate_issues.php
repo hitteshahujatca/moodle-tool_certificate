@@ -103,7 +103,7 @@ class certificate_issues extends modal_form {
         $expirydate = certificate_manager::calculate_expirydate($data->expirydatetype, $data->expirydateabsolute,
             $data->expirydaterelative);
         $customdate = $data->customdateabsolute;
-        $sendnotif = (bool)$data->sendissuenotification;
+        $sendnotif = isset($data->sendissuenotification) ? (int)$data->sendissuenotification : 0;
         foreach ($data->users as $userid) {
             if ($this->get_template()->can_issue($userid)) {
                 $result = $this->get_template()->issue_certificate($userid, $expirydate, ['sendissuenotification' => $sendnotif,
