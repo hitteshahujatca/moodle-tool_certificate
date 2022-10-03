@@ -40,6 +40,7 @@ Feature: Being able to manually issue a certificate to a user
     And I navigate to "Certificates > Manage certificate templates" in site administration
     And I click on "Issue certificates from this template" "link" in the "Certificate 0" "table_row"
     And I set the field "Select users to issue certificate to" to "User 11"
+    And I set the field "Send email notification" to "1"
     And I press "Save"
     And I click on "Certificates issued" "link" in the "Certificate 0" "table_row"
     Then "User 11" "text" should exist in the "tool-certificate-issues" "table"
