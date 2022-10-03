@@ -710,7 +710,7 @@ class template {
         // Create the issue file and send notification.
         $issuefile = $this->create_issue_file($issue);
         // Only issue notification when the checkbox is checked.Hittesh Ahuja / The Crew Academy.
-        if (!empty($data['sendissuenotification'])) {
+        if (isset($data['sendissuenotification']) && !is_null($data['sendissuenotification'])) {
             self::send_issue_notification($issue, $issuefile);
         }
 
