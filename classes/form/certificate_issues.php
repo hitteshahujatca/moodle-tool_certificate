@@ -74,7 +74,7 @@ class certificate_issues extends modal_form {
         certificate_manager::add_expirydate_to_form($mform);
         // Custom issue date.
         certificate_manager::add_customissuedate_to_form($mform);
-        // Send notification.
+        // Send notification to user.
         certificate_manager::add_send_notification_checkbox_to_form($mform);
     }
 
