@@ -106,7 +106,8 @@ class certificate_issues extends modal_form {
         $sendnotif = (bool)$data->sendissuenotification;
         foreach ($data->users as $userid) {
             if ($this->get_template()->can_issue($userid)) {
-                $result = $this->get_template()->issue_certificate($userid, $expirydate, ['sendissuenotification' => $sendnotif, 'customdate' => $customdate]);
+                $result = $this->get_template()->issue_certificate($userid, $expirydate, ['sendissuenotification' => $sendnotif,
+                'customdate' => $customdate]);
                 if ($result) {
                     $i++;
                 }
