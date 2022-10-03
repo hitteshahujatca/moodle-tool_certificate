@@ -699,7 +699,6 @@ class template {
         // Store user fullname.
         $data['userfullname'] = fullname($DB->get_record('user', ['id' => $userid]));
         $issue->data = json_encode($data);
-
         // Insert the record into the database.
         $issue->id = $DB->insert_record('tool_certificate_issues', $issue);
         if ($lock) {
@@ -710,7 +709,7 @@ class template {
         // Create the issue file and send notification.
         $issuefile = $this->create_issue_file($issue);
         // Only issue notification when the checkbox is checked.Hittesh Ahuja / The Crew Academy.
-        if (isset($data['sendissuenotification']) && !is_null($data['sendissuenotification'])) {
+        if (($data['sendissuenotification'])) {
             self::send_issue_notification($issue, $issuefile);
         }
 
