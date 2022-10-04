@@ -316,7 +316,7 @@ class template_test extends advanced_testcase {
         $sink = $this->redirectEvents();
         $messagessink = $this->redirectMessages();
         $data['sendissuenotification'] = 1; // We enable notifications to fulfill the test.
-        $issue1 = $this->get_generator()->issue($certificate1, $user1);
+        $issue1 = $this->get_generator()->issue($certificate1, $user1, null, $data);
 
         $events = $sink->get_events();
         $messages = $messagessink->get_messages();
