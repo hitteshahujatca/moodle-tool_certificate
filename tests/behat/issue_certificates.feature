@@ -130,23 +130,18 @@ Feature: Being able to manually issue a certificate to a user
     And I should see "User 11"
     And I log out
 
-  Scenario: Issue a certificate with custom issue date as issuer user
-    When I log in as "issuer0"
+  Scenario: Issue a certificate but do not send notifiations
+    When I log in as "admin"
     And I navigate to "Certificates > Manage certificate templates" in site administration
-        # Issue a certificate for user11 with custom issue date.
-    And I press "Issue certificates" action in the "Certificate 0" report row
-    And the field "expirydatetype" matches value "Never"
-    And I set the field "customdateabsolute[enabled]" to "1"
-    And the field "customdateabsolute[enabled]" matches value "1"
-    And I set the following fields to these values:
-      | Select users to issue certificate to  | User 11 |
-      | customdateabsolute[day]               | ##tomorrow##%d##    |
-      | customdateabsolute[month]             | ##tomorrow##%B##    |
-      | customdateabsolute[year]              | ##tomorrow##%Y##    |
+    And I click on "Issue certificates from this template" "link" in the "Certificate 0" "table_row"
+    And I set the field "Select users to issue certificate to" to "User 11"
     And I press "Save"
-    And I press "Certificates issued" action in the "Certificate 0" report row
-    Then "User 11" "text" should exist in the "reportbuilder-table" "table"
-    And the following should exist in the "reportbuilder-table" table:
-      | First name / Surname | Date issued            |
-      | User 11              | ##tomorrow##%d %B %Y## |
+    And I click on "Certificates issued" "link" in the "Certificate 0" "table_row"
+    Then "User 11" "text" should exist in the "tool-certificate-issues" "table"
+    And I log out
+    # Check notifications are triggered.
+    And I log in as "user11"
+    And I am on site homepage
+    When I click on ".popover-region-notifications" "css_element"
+    Then I should not see "Your certificate is available!"
     And I log out
